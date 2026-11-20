@@ -1,6 +1,7 @@
 package com.example.banque.utilisateur.out;
 
 import com.example.banque.utilisateur.Utilisateur;
+import org.springframework.security.core.context.SecurityContext;
 
 import java.util.Optional;
 

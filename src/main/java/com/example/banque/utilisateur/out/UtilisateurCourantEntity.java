@@ -2,7 +2,11 @@ package com.example.banque.utilisateur.out;
 
 import com.example.banque.utilisateur.Utilisateur;
 import com.example.banque.utilisateur.UtilisateurRepository;
+import jakarta.validation.constraints.Null;
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -13,18 +17,18 @@ import java.util.Optional;
  * qui lit le SecurityContext (supprimez alors cette classe).
  */
 @Component
-public class UtilisateurCourantFake implements UtilisateurCourant {
+public class UtilisateurCourantEntity implements UtilisateurCourant {
 
     private final UtilisateurRepository utilisateurs;
-    private final String login;
 
-    public UtilisateurCourantFake(UtilisateurRepository utilisateurs, @Value("${app.utilisateur-fake}") String login) {
+    public UtilisateurCourantEntity(UtilisateurRepository utilisateurs) {
         this.utilisateurs = utilisateurs;
-        this.login = login;
     }
 
     @Override
     public Optional<Utilisateur> get() {
-        return utilisateurs.findByLogin(login);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        return Optional.empty();
     }
 }
